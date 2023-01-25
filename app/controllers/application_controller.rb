@@ -35,7 +35,10 @@ class ApplicationController < ActionController::Base
     @APR = params.fetch("APR").to_f.round(4)
     @num_years = params.fetch("num_years").to_f.round()
     @principal = params.fetch("principal").to_f.round(2)
-    @payment = (@principal * (@APR/100 / @num_years)).round(2)
+
+    @numerator = @principal*(@APR/100)*((1+@APR/100)**@num_years
+    @denominator = (1+@APR/100)**@num_years)-1
+    @payment = (@numerator/@denominator).round(2)
 
     render({ :template => "calculation_templates/payment_results.html.erb"})
   end
