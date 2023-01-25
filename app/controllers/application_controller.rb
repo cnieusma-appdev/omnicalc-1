@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
     render({ :template => "calculation_templates/payment_form.html.erb"})
   end
 
+  def rand_form
+    render({ :template => "calculation_templates/rand_form.html.erb"})
+  end
 
   def calculate_square
     @num = params.fetch("square").to_f
@@ -38,8 +41,8 @@ class ApplicationController < ActionController::Base
   end
 
   def calculate_random
-    @lower = params.fetch("user_min").to_i
-    @upper = params.fetch("user_max").to_i
+    @lower = params.fetch("user_min").to_f
+    @upper = params.fetch("user_max").to_f
     @result = rand(@lower..@upper)
     render({ :template => "calculation_templates/rand_results.html.erb"})
   
